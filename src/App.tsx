@@ -1,17 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
+import { useDispatch } from 'react-redux'
+import { decrement, increment } from './redux/features/counterSlice'
+import { useAppSelector } from './redux/hooks'
 
 
 function App() {
-  const [count, setCount] = useState(0)
+const dispatch = useDispatch()
+const {count} =useAppSelector((state)=> state.counter)
+const handleIncrement = ()=>{
+  dispatch(increment())
+}
+const handleDecrement = ()=>{
+  dispatch(decrement())
+}
+
 
   return (
     <>
-      <button>Increment</button>
+      <button onClick={handleIncrement}>Increment</button>
 
-<div>0</div>
-    <button>Decrement</button>
+<div>{count}</div>
+    <button onClick={handleDecrement}>Decrement</button>
     </>
   )
 }
